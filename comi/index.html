@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>comic漫画-在线漫画阅读平台与漫画作品推荐指南</title>
+<meta name="description" content="comic漫画是一个面向漫画爱好者的在线阅读与作品发现平台，提供漫画分类浏览、热门作品推荐、新作更新、阅读方式说明与常见问题解答，帮助你快速找到适合自己的漫画内容。">
+<meta name="keywords" content="comic漫画,在线漫画,漫画阅读,漫画推荐,漫画分类,日漫,国漫,韩漫">
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+<style>
+  :root{
+    --ink:#1d1f27;
+    --ink-soft:#4a4f5c;
+    --muted:#7b8194;
+    --line:#e6e4ee;
+    --paper:#ffffff;
+    --paper-2:#f7f6fb;
+    --brand:#5b4bdb;
+    --brand-2:#8a5cf6;
+    --brand-soft:#efecff;
+    --accent:#ff6b6b;
+    --accent-soft:#fff0f0;
+    --mint:#17b8a6;
+    --radius:16px;
+    --radius-sm:10px;
+    --shadow:0 10px 30px rgba(38,32,84,.08);
+    --shadow-hover:0 16px 40px rgba(38,32,84,.14);
+    --max:1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+    font-size:16px;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul,ol{margin:0;padding:0;list-style:none;}
+  h1,h2,h3,h4{margin:0;line-height:1.35;font-weight:800;letter-spacing:.2px;}
+  p{margin:0 0 1em;}
+  .wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 20px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 22px;border-radius:999px;
+    font-weight:700;font-size:15px;border:1px solid transparent;
+    cursor:pointer;transition:.22s ease;white-space:nowrap;
+  }
+  .btn-main{background:linear-gradient(120deg,var(--brand),var(--brand-2));color:#fff;box-shadow:0 8px 20px rgba(91,75,219,.28);}
+  .btn-main:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(91,75,219,.34);}
+  .btn-ghost{background:#fff;color:var(--brand);border-color:#ddd7ff;}
+  .btn-ghost:hover{background:var(--brand-soft);border-color:var(--brand);}
+  .eyebrow{
+    display:inline-block;font-size:13px;font-weight:800;letter-spacing:2px;
+    color:var(--brand);background:var(--brand-soft);
+    padding:5px 14px;border-radius:999px;margin-bottom:16px;
+  }
+  .sec{padding:66px 0;}
+  .sec-head{max-width:760px;margin-bottom:36px;}
+  .sec-head h2{font-size:clamp(22px,3.2vw,30px);margin-bottom:12px;}
+  .sec-head p{color:var(--ink-soft);margin:0;font-size:15.5px;}
+  .sec-alt{background:var(--paper-2);}
+
+  /* ---------- header ---------- */
+  .site-header{
+    position:sticky;top:0;z-index:60;
+    background:rgba(255,255,255,.9);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;height:68px;}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:19px;letter-spacing:.5px;}
+  .logo-mark{
+    width:36px;height:36px;border-radius:11px;
+    background:linear-gradient(135deg,var(--brand),var(--accent));
+    display:grid;place-items:center;color:#fff;font-size:17px;font-weight:900;
+    box-shadow:0 6px 16px rgba(91,75,219,.3);
+  }
+  .logo small{display:block;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:1.5px;line-height:1;}
+  .main-nav{display:flex;align-items:center;gap:4px;}
+  .main-nav a{
+    padding:9px 14px;border-radius:10px;font-size:15px;font-weight:600;color:var(--ink-soft);
+    transition:.2s;
+  }
+  .main-nav a:hover{color:var(--brand);background:var(--brand-soft);}
+  .header-cta{display:flex;align-items:center;gap:10px;}
+  .nav-toggle{
+    display:none;background:none;border:1px solid var(--line);border-radius:10px;
+    width:42px;height:42px;cursor:pointer;font-size:18px;color:var(--ink);
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    background:
+      radial-gradient(900px 420px at 88% -10%,rgba(138,92,246,.20),transparent 62%),
+      radial-gradient(700px 380px at 4% 8%,rgba(255,107,107,.14),transparent 60%),
+      linear-gradient(180deg,#fbfaff 0%,#ffffff 100%);
+    border-bottom:1px solid var(--line);
+  }
+  .hero-inner{
+    display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;
+    padding:70px 0 76px;
+  }
+  .hero h1{
+    font-size:clamp(30px,4.6vw,48px);
+    line-height:1.22;margin-bottom:18px;
+  }
+  .hero h1 .hl{
+    background:linear-gradient(120deg,var(--brand),var(--accent));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero-lead{font-size:16.5px;color:var(--ink-soft);max-width:560px;margin-bottom:28px;}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:30px;}
+  .hero-facts{display:flex;flex-wrap:wrap;gap:26px;padding-top:22px;border-top:1px dashed #ded9f5;}
+  .hero-facts li{font-size:14px;color:var(--ink-soft);}
+  .hero-facts strong{display:block;font-size:20px;color:var(--ink);font-weight:900;margin-bottom:2px;}
+
+  .hero-panel{
+    background:#fff;border:1px solid var(--line);border-radius:22px;
+    padding:22px;box-shadow:var(--shadow);
+  }
+  .hero-panel h3{font-size:16px;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+  .hero-panel h3 span{
+    width:8px;height:8px;border-radius:50%;background:var(--accent);
+    box-shadow:0 0 0 4px var(--accent-soft);
+  }
+  .rank-list li{
+    display:flex;align-items:center;gap:14px;padding:11px 0;border-bottom:1px dashed #eeecf6;
+  }
+  .rank-list li:last-child{border-bottom:0;padding-bottom:0;}
+  .rank-no{
+    flex:0 0 26px;height:26px;border-radius:8px;display:grid;place-items:center;
+    font-size:13px;font-weight:900;background:var(--paper-2);color:var(--muted);
+  }
+  .rank-list li:nth-child(1) .rank-no{background:linear-gradient(135deg,#ff8a5b,#ff5f6d);color:#fff;}
+  .rank-list li:nth-child(2) .rank-no{background:linear-gradient(135deg,#8a5cf6,#5b4bdb);color:#fff;}
+  .rank-list li:nth-child(3) .rank-no{background:linear-gradient(135deg,#17b8a6,#0f9c8d);color:#fff;}
+  .rank-meta{flex:1;min-width:0;}
+  .rank-meta b{display:block;font-size:14.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .rank-meta em{font-style:normal;font-size:12.5px;color:var(--muted);}
+  .rank-tag{
+    font-size:12px;font-weight:700;color:var(--brand);background:var(--brand-soft);
+    padding:3px 10px;border-radius:999px;white-space:nowrap;
+  }
+
+  /* ---------- category ---------- */
+  .cat-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;
+  }
+  .cat-card{
+    border:1px solid var(--line);border-radius:var(--radius);padding:22px;
+    background:#fff;transition:.22s;position:relative;overflow:hidden;
+  }
+  .cat-card::after{
+    content:"";position:absolute;inset:auto -30px -30px auto;width:90px;height:90px;
+    border-radius:50%;background:var(--brand-soft);opacity:.7;transition:.25s;
+  }
+  .cat-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);border-color:#d9d2ff;}
+  .cat-card:hover::after{transform:scale(1.35);}
+  .cat-icon{
+    width:44px;height:44px;border-radius:12px;display:grid;place-items:center;
+    font-size:20px;margin-bottom:14px;background:var(--brand-soft);position:relative;z-index:1;
+  }
+  .cat-card h3{font-size:16.5px;margin-bottom:8px;position:relative;z-index:1;}
+  .cat-card p{font-size:13.8px;color:var(--ink-soft);margin:0;position:relative;z-index:1;}
+
+  /* ---------- works ---------- */
+  .work-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;}
+  .work-card{
+    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;
+    display:flex;flex-direction:column;transition:.22s;
+  }
+  .work-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover);}
+  .work-cover{
+    height:132px;display:grid;place-items:center;color:#fff;font-weight:900;font-size:26px;
+    letter-spacing:2px;position:relative;
+  }
+  .work-cover.c1{background:linear-gradient(135deg,#5b4bdb,#8a5cf6);}
+  .work-cover.c2{background:linear-gradient(135deg,#ff7a59,#ff5f6d);}
+  .work-cover.c3{background:linear-gradient(135deg,#17b8a6,#3aa0ff);}
+  .work-cover.c4{background:linear-gradient(135deg,#f2a03d,#ff6b6b);}
+  .work-cover.c5{background:linear-gradient(135deg,#3f5efb,#8a5cf6);}
+  .work-cover.c6{background:linear-gradient(135deg,#0f9c8d,#5b4bdb);}
+  .work-cover span{
+    position:absolute;left:14px;bottom:12px;font-size:12px;letter-spacing:1px;
+    background:rgba(255,255,255,.22);padding:3px 10px;border-radius:999px;font-weight:700;
+  }
+  .work-body{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1;}
+  .work-body h3{font-size:16px;margin-bottom:8px;}
+  .work-body p{font-size:13.6px;color:var(--ink-soft);margin:0 0 14px;flex:1;}
+  .work-foot{display:flex;align-items:center;justify-content:space-between;font-size:12.5px;color:var(--muted);}
+  .work-foot b{color:var(--brand);font-weight:800;}
+
+  /* ---------- guide ---------- */
+  .guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;}
+  .guide-item{
+    background:#fff;border-radius:var(--radius);padding:24px;border:1px solid var(--line);
+    position:relative;
+  }
+  .guide-item .num{
+    font-size:13px;font-weight:900;letter-spacing:2px;color:var(--brand);
+    display:block;margin-bottom:10px;
+  }
+  .guide-item h3{font-size:17px;margin-bottom:10px;}
+  .guide-item p{font-size:14.2px;color:var(--ink-soft);margin:0;}
+
+  /* ---------- reading ---------- */
+  .read-layout{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start;}
+  .read-list li{
+    display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);
+  }
+  .read-list li:last-child{border-bottom:0;}
+  .read-dot{
+    flex:0 0 34px;height:34px;border-radius:10px;background:var(--brand-soft);
+    color:var(--brand);display:grid;place-items:center;font-weight:900;font-size:14px;
+  }
+  .read-list b{display:block;font-size:15.5px;margin-bottom:4px;}
+  .read-list p{font-size:14px;color:var(--ink-soft);margin:0;}
+  .tip-box{
+    background:linear-gradient(150deg,#1d1f27,#2c2f3e);color:#e9e8f5;
+    border-radius:var(--radius);padding:28px;
+  }
+  .tip-box h3{font-size:17px;margin-bottom:14px;color:#fff;}
+  .tip-box ul li{
+    font-size:14.2px;color:#c9c7dd;padding-left:20px;position:relative;margin-bottom:10px;
+  }
+  .tip-box ul li::before{
+    content:"";position:absolute;left:0;top:9px;width:8px;height:8px;border-radius:50%;
+    background:var(--accent);
+  }
+
+  /* ---------- faq ---------- */
+  .faq-list{max-width:860px;}
+  .faq-item{
+    border:1px solid var(--line);border-radius:var(--radius-sm);
+    margin-bottom:12px;background:#fff;overflow:hidden;
+  }
+  .faq-q{
+    width:100%;text-align:left;background:none;border:0;cursor:pointer;
+    padding:18px 20px;font-size:15.5px;font-weight:700;color:var(--ink);
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
+    font-family:inherit;
+  }
+  .faq-q i{
+    font-style:normal;color:var(--brand);font-size:18px;transition:.25s;flex:0 0 auto;
+  }
+  .faq-item.open .faq-q i{transform:rotate(45deg);}
+  .faq-a{
+    max-height:0;overflow:hidden;transition:max-height .3s ease;
+  }
+  .faq-a p{
+    padding:0 20px 18px;margin:0;font-size:14.4px;color:var(--ink-soft);
+  }
+
+  /* ---------- cta ---------- */
+  .cta-band{
+    background:linear-gradient(120deg,#5b4bdb,#8a5cf6 55%,#ff6b6b);
+    border-radius:24px;padding:46px 40px;color:#fff;
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;
+  }
+  .cta-band h2{font-size:clamp(20px,3vw,28px);margin-bottom:8px;color:#fff;}
+  .cta-band p{margin:0;color:rgba(255,255,255,.86);font-size:15px;max-width:560px;}
+  .cta-band .btn{background:#fff;color:var(--brand);}
+  .cta-band .btn:hover{transform:translateY(-2px);}
+
+  /* ---------- footer ---------- */
+  .site-footer{
+    background:#15161d;color:#a9a8bd;padding:54px 0 26px;margin-top:20px;
+  }
+  .footer-grid{
+    display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:34px;
+  }
+  .site-footer h4{color:#fff;font-size:15px;margin-bottom:16px;}
+  .site-footer p{font-size:13.8px;color:#8f8ea6;margin:0 0 10px;}
+  .site-footer a{font-size:13.8px;color:#a9a8bd;display:block;padding:5px 0;transition:.2s;}
+  .site-footer a:hover{color:#fff;}
+  .footer-logo{display:flex;align-items:center;gap:10px;color:#fff;font-weight:900;font-size:17px;margin-bottom:14px;}
+  .footer-bottom{
+    border-top:1px solid #262734;margin-top:38px;padding-top:20px;
+    display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
+    font-size:13px;color:#77768c;
+  }
+
+  @media (max-width:980px){
+    .hero-inner{grid-template-columns:1fr;gap:36px;padding:52px 0 58px;}
+    .read-layout{grid-template-columns:1fr;gap:28px;}
+    .footer-grid{grid-template-columns:1fr 1fr;gap:26px;}
+  }
+  @media (max-width:760px){
+    .main-nav{
+      display:none;position:absolute;left:0;right:0;top:68px;
+      background:#fff;border-bottom:1px solid var(--line);
+      flex-direction:column;align-items:stretch;padding:10px 16px 18px;gap:2px;
+      box-shadow:0 14px 24px rgba(30,26,60,.08);
+    }
+    .main-nav.open{display:flex;}
+    .main-nav a{padding:12px 10px;}
+    .nav-toggle{display:grid;place-items:center;}
+    .header-cta .btn{display:none;}
+    .sec{padding:48px 0;}
+    .cta-band{padding:34px 24px;}
+    .hero-facts{gap:18px;}
+  }
+  @media (max-width:520px){
+    .footer-grid{grid-template-columns:1fr;}
+    .work-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;}
+    .work-cover{height:110px;font-size:22px;}
+    .hero-actions .btn{flex:1;justify-content:center;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="#" class="logo" aria-label="comic漫画首页">
+      <span class="logo-mark">漫</span>
+      <span>comic漫画<small>COMIC READING</small></span>
+    </a>
+    <nav class="main-nav" id="mainNav" aria-label="主导航">
+      <a href="#categories">漫画分类</a>
+      <a href="#works">作品推荐</a>
+      <a href="#guide">选漫指南</a>
+      <a href="#reading">阅读方式</a>
+      <a href="#faq">常见问题</a>
+    </nav>
+    <div class="header-cta">
+      <a href="#works" class="btn btn-main">开始找漫画</a>
+      <button class="nav-toggle" id="navToggle" aria-label="展开导航" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <span class="eyebrow">COMIC 漫画阅读入口</span>
+        <h1>在 comic漫画 里，<span class="hl">找到下一部想追的作品</span></h1>
+        <p class="hero-lead">
+          comic漫画是一个面向漫画爱好者的作品发现与阅读指引平台。这里按题材、地区、连载状态整理漫画分类，
+          提供热门作品推荐、新作更新提示、阅读方式说明与常见问题解答，帮助你在众多作品里更快判断
+          “这部漫画讲什么、适不适合我、从哪里开始看”。
+        </p>
+        <div class="hero-actions">
+          <a href="#categories" class="btn btn-main">按分类浏览漫画</a>
+          <a href="#guide" class="btn btn-ghost">查看选漫指南</a>
+        </div>
+        <ul class="hero-facts">
+          <li><strong>题材维度</strong>热血 · 恋爱 · 悬疑 · 日常</li>
+          <li><strong>地区维度</strong>国漫 · 日漫 · 韩漫 · 欧美</li>
+          <li><strong>状态维度</strong>连载中 · 已完结 · 新作</li>
+        </ul>
+      </div>
+      <aside class="hero-panel" aria-label="编辑推荐榜">
+        <h3><span></span>本周编辑推荐</h3>
+        <ul class="rank-list">
+          <li>
+            <span class="rank-no">1</span>
+            <span class="rank-meta"><b>少年与剑的漫长旅途</b><em>热血 / 冒险 · 连载中</em></span>
+            <span class="rank-tag">成长线</span>
+          </li>
+          <li>
+            <span class="rank-no">2</span>
+            <span class="rank-meta"><b>城市夜行观察笔记</b><em>悬疑 / 都市 · 连载中</em></span>
+            <span class="rank-tag">烧脑</span>
+          </li>
+          <li>
+            <span class="rank-no">3</span>
+            <span class="rank-meta"><b>慢半拍的春天</b><em>恋爱 / 日常 · 已完结</em></span>
+            <span class="rank-tag">治愈</span>
+          </li>
+          <li>
+            <span class="rank-no">4</span>
+            <span class="rank-meta"><b>山海食堂物语</b><em>美食 / 奇幻 · 连载中</em></span>
+            <span class="rank-tag">轻松</span>
+          </li>
+          <li>
+            <span class="rank-no">5</span>
+            <span class="rank-meta"><b>第七号观测站</b><em>科幻 / 悬疑 · 新作</em></span>
+            <span class="rank-tag">新连载</span>
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 分类 -->
+  <section class="sec" id="categories">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">分类浏览</span>
+        <h2>按你真正关心的维度筛选漫画</h2>
+        <p>很多读者找漫画时并不是先想到具体书名，而是先有一个模糊的偏好：想看轻松的、想看剧情紧凑的、想找已经完结不用等更新的。
+           下面这些分类维度，就是按这种真实需求来组织的。</p>
+      </div>
+      <div class="cat-grid">
+        <article class="cat-card">
+          <div class="cat-icon">🔥</div>
+          <h3>热血与冒险</h3>
+          <p>主角成长、目标明确、节奏推进感强。适合喜欢看角色一步步变强、剧情持续升级的读者。</p>
+        </article>
+        <article class="cat-card">
+          <div class="cat-icon">💗</div>
+          <h3>恋爱与日常</h3>
+          <p>侧重人物关系与情绪细节，节奏相对舒缓。适合想在碎片时间轻松阅读、不想有太强压迫感的读者。</p>
+        </article>
+        <article class="cat-card">
+          <div class="cat-icon">🕵️</div>
+          <h3>悬疑与推理</h3>
+          <p>以谜题、线索和反转为核心，阅读时需要注意前后细节。适合愿意慢慢琢磨剧情的读者。</p>
+        </article>
+        <article class="cat-card">
+          <div class="cat-icon">🌌</div>
+          <h3>科幻与奇幻</h3>
+          <p>世界观设定是主要看点，常见于架空背景、未来设定或超自然规则。适合喜欢沉浸式世界构建的读者。</p>
+        </article>
+        <article class="cat-card">
+          <div class="cat-icon">🍜</div>
+          <h3>美食与生活</h3>
+          <p>以生活场景、饮食文化和人物互动为主，整体氛围偏温暖，适合作为高强度题材之间的调剂。</p>
+        </article>
+        <article class="cat-card">
+          <div class="cat-icon">📚</div>
+          <h3>校园与青春</h3>
+          <p>围绕学生时代的友情、社团、升学与自我认同展开，情感表达直接，容易引发共鸣。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 作品推荐 -->
+  <section class="sec sec-alt" id="works">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">作品推荐</span>
+        <h2>不同口味都能对上号的漫画推荐</h2>
+        <p>以下为编辑按题材与阅读体验整理的推荐方向，每一条都说明了适合什么样的读者。作品名称与简介为示意性描述，
+           用于帮助你理解该类型的阅读感受，具体作品信息请以实际阅读平台为准。</p>
+      </div>
+      <div class="work-grid">
+        <article class="work-card">
+          <div class="work-cover c1">热血<span>冒险 / 连载中</span></div>
+          <div class="work-body">
+            <h3>少年与剑的漫长旅途</h3>
+            <p>从一个小镇出发的少年，在旅途中不断面对选择。看点在于角色的成长弧线清晰，战斗场面与心理描写交替推进。</p>
+            <div class="work-foot"><span>适合：喜欢成长线</span><b>热血</b></div>
+          </div>
+        </article>
+        <article class="work-card">
+          <div class="work-cover c2">悬疑<span>都市 / 连载中</span></div>
+          <div class="work-body">
+            <h3>城市夜行观察笔记</h3>
+            <p>以城市夜晚为舞台，用一个个短篇事件串联主线谜题。阅读时需要留意细节伏笔，适合慢慢推敲的读者。</p>
+            <div class="work-foot"><span>适合：细节控</span><b>悬疑</b></div>
+          </div>
+        </article>
+        <article class="work-card">
+          <div class="work-cover c3">治愈<span>恋爱 / 已完结</span></div>
+          <div class="work-body">
+            <h3>慢半拍的春天</h3>
+            <p>两个人从陌生到熟悉的过程被拆成很多小片段，情绪推进自然。已完结，适合想一次性读完的读者。</p>
+            <div class="work-foot"><span>适合：轻松阅读</span><b>恋爱</b></div>
+          </div>
+        </article>
+        <article class="work-card">
+          <div class="work-cover c4">奇幻<span>美食 / 连载中</span></div>
+          <div class="work-body">
+            <h3>山海食堂物语</h3>
+            <p>以一间小店为圆心，展开人与食物之间的故事。单元剧结构，随时可以开始看，不需要记住复杂前情。</p>
+            <div class="work-foot"><span>适合：碎片时间</span><b>美食</b></div>
+          </div>
+        </article>
+        <article class="work-card">
+          <div class="work-cover c5">科幻<span>悬疑 / 新作</span></div>
+          <div class="work-body">
+            <h3>第七号观测站</h3>
+            <p>封闭空间内的群像叙事，围绕观测记录展开推理。设定密度较高，建议从第一话顺序阅读。</p>
+            <div class="work-foot"><span>适合：设定党</span><b>科幻</b></div>
+          </div>
+        </article>
+        <article class="work-card">
+          <div class="work-cover c6">校园<span>青春 / 连载中</span></div>
+          <div class="work-body">
+            <h3>社团活动日志</h3>
+            <p>以社团日常为主轴，穿插比赛与升学压力。节奏明快，角色之间的互动是主要看点。</p>
+            <div class="work-foot"><span>适合：群像故事</span><b>校园</b></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 选漫指南 -->
+  <section class="sec" id="guide">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">选漫指南</span>
+        <h2>不知道怎么选？先回答这四个问题</h2>
+        <p>与其在榜单里反复翻页，不如先明确自己的阅读偏好。下面四个问题基本能帮你把选择范围缩小到可接受的程度。</p>
+      </div>
+      <div class="guide-grid">
+        <article class="guide-item">
+          <span class="num">STEP 01</span>
+          <h3>你现在有多少阅读时间？</h3>
+          <p>时间零散、每次只能看几分钟，优先选单元剧或日常向作品；如果有整块时间，可以尝试主线长、伏笔多的连载。</p>
+        </article>
+        <article class="guide-item">
+          <span class="num">STEP 02</span>
+          <h3>你能接受等更新吗？</h3>
+          <p>不喜欢等待就优先筛“已完结”，阅读体验完整；能接受追更，则连载中作品往往讨论氛围更活跃。</p>
+        </article>
+        <article class="guide-item">
+          <span class="num">STEP 03</span>
+          <h3>你更在意剧情还是氛围？</h3>
+          <p>在意剧情推进的读者适合悬疑、冒险类；在意情绪与氛围的读者，日常、治愈、恋爱类通常更容易读进去。</p>
+        </article>
+        <article class="guide-item">
+          <span class="num">STEP 04</span>
+          <h3>你习惯从第几话开始？</h3>
+          <p>长篇作品建议从第一话顺序阅读，避免跳过铺垫；单元剧结构则可以从任意一话进入，之后再回看前面内容。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 阅读方式 -->
+  <section class="sec sec-alt" id="reading">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">阅读方式</span>
+        <h2>把漫画读得更顺的几个实际做法</h2>
+        <p>阅读体验不只取决于作品本身，也和阅读节奏、设备设置、追更习惯有关。下面这些做法对大多数读者都适用。</p>
+      </div>
+      <div class="read-layout">
+        <ul class="read-list">
+          <li>
+            <span class="read-dot">1</span>
+            <span>
+              <b>先看简介与前几话，再决定是否追下去</b>
+              <p>简介能告诉你题材和基调，前几话能告诉你叙事节奏。两者结合判断，比只看榜单排名更可靠。</p>
+            </span>
+          </li>
+          <li>
+            <span class="read-dot">2</span>
+            <span>
+              <b>调整适合自己设备的阅读模式</b>
+              <p>手机端适合条漫式上下滑动阅读，平板或电脑端更适合整页排版。字号、亮度、翻页方向都可以按习惯调整。</p>
+            </span>
+          </li>
+          <li>
+            <span class="read-dot">3</span>
+            <span>
+              <b>给长篇作品留出连续阅读的时间</b>
+              <p>主线复杂、人物众多的作品，如果间隔太久容易忘记前情。可以固定每周一个时间段集中阅读。</p>
+            </span>
+          </li>
+          <li>
+            <span class="read-dot">4</span>
+            <span>
+              <b>记录自己看到哪一话</b>
+              <p>同时追多部作品时，用书签或笔记记录进度，能明显减少“记不清看到哪”的困扰。</p>
+            </span>
+          </li>
+          <li>
+            <span class="read-dot">5</span>
+            <span>
+              <b>适度控制连续阅读时长</b>
+              <p>长时间盯着屏幕容易疲劳，建议每隔一段时间休息，尤其是夜间阅读时调低屏幕亮度。</p>
+            </span>
+          </li>
+        </ul>
+        <aside class="tip-box">
+          <h3>阅读漫画时的几个提醒</h3>
+          <ul>
+            <li>选择正规、稳定的阅读渠道，避免来源不明的页面影响阅读体验。</li>
+            <li>注意用眼习惯，保持合适距离与环境光线。</li>
+            <li>尊重作者的创作与版权，不传播未经授权的内容。</li>
+            <li>追更时留意更新节奏，避免因等待影响正常作息。</li>
+            <li>遇到不适合作品及时跳过，阅读本身应以舒适为前提。</li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="sec" id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">常见问题</span>
+        <h2>关于 comic漫画 的常见疑问</h2>
+        <p>下面整理的是读者在接触漫画阅读时经常提出的问题，回答尽量保持客观，不涉及具体平台的承诺性表述。</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" type="button">comic漫画和普通漫画有什么区别？<i>+</i></button>
+          <div class="faq-a"><p>“comic”本身是漫画的通用英文说法，comic漫画通常指以漫画作品为核心内容的阅读与浏览场景。它强调的是作品集合与阅读体验，而不是某一种特定的绘画风格或地区分类。</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button">第一次看漫画，应该从哪一类开始？<i>+</i></button>
+          <div class="faq-a"><p>建议从单元剧结构或日常向作品入手，这类作品对前情依赖较低，随时可以开始阅读，也更容易判断自己是否喜欢漫画这种叙事形式。之后再逐步尝试主线更长的作品。</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button">条漫和页漫的阅读方式有什么不同？<i>+</i></button>
+          <div class="faq-a"><p>条漫通常为纵向长条排版，适合手机上下滑动连续阅读；页漫按整页分镜设计，更接近传统纸质阅读节奏，在平板或电脑上阅读体验更完整。两种形式各有优势，主要看设备与个人习惯。</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button">连载中的作品值得追吗？<i>+</i></button>
+          <div class="faq-a"><p>连载中作品的优势是讨论氛围活跃、更新带来的期待感强；不足是需要等待，且剧情走向存在不确定性。如果你不介意等待，可以从更新节奏稳定的作品开始追。</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button">同时追很多部漫画会不会看混？<i>+</i></button>
+          <div class="faq-a"><p>同时追多部作品时，建议用书签或简单笔记记录进度，并尽量把题材差异较大的作品搭配着看，这样不容易把人物和剧情混淆。</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button">怎样判断一部漫画是否适合自己？<i>+</i></button>
+          <div class="faq-a"><p>可以先看作品简介确认题材与基调，再读前几话感受叙事节奏和画风。如果前几话就能让你产生继续读下去的意愿，通常说明这部作品与你的偏好比较接近。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="cta-band">
+        <div>
+          <h2>从分类开始，比从榜单开始更快找到想看的漫画</h2>
+          <p>先明确题材、状态和阅读时间，再进入作品列表筛选，通常会比盲目翻榜单更有效率。</p>
+        </div>
+        <a href="#categories" class="btn">浏览漫画分类</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo"><span class="logo-mark">漫</span>comic漫画</div>
+        <p>面向漫画爱好者的作品发现与阅读指引平台，按题材、地区与连载状态整理漫画分类，提供推荐方向、阅读方式说明与常见问题解答。</p>
+      </div>
+      <div>
+        <h4>内容导航</h4>
+        <a href="#categories">漫画分类</a>
+        <a href="#works">作品推荐</a>
+        <a href="#guide">选漫指南</a>
+      </div>
+      <div>
+        <h4>阅读帮助</h4>
+        <a href="#reading">阅读方式</a>
+        <a href="#faq">常见问题</a>
+        <a href="#categories">题材速览</a>
+      </div>
+      <div>
+        <h4>阅读提示</h4>
+        <a href="#reading">用眼与作息建议</a>
+        <a href="#reading">阅读渠道选择</a>
+        <a href="#reading">版权与创作尊重</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 comic漫画 · 内容仅作阅读指引与信息整理</span>
+      <span>页面内容为示意性说明，具体作品信息请以实际阅读平台为准</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var toggle = document.getElementById('navToggle');
+    var nav = document.getElementById('mainNav');
+    if(toggle && nav){
+      toggle.addEventListener('click', function(){
+        var open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.textContent = open ? '✕' : '☰';
+      });
+      nav.addEventListener('click', function(e){
+        if(e.target.tagName === 'A'){
+          nav.classList.remove('open');
+          toggle.setAttribute('aria-expanded','false');
+          toggle.textContent = '☰';
+        }
+      });
+    }
+
+    var items = document.querySelectorAll('.faq-item');
+    items.forEach(function(item){
+      var btn = item.querySelector('.faq-q');
+      var panel = item.querySelector('.faq-a');
+      if(!btn || !panel) return;
+      btn.addEventListener('click', function(){
+        var isOpen = item.classList.contains('open');
+        items.forEach(function(other){
+          other.classList.remove('open');
+          var p = other.querySelector('.faq-a');
+          if(p) p.style.maxHeight = '0px';
+        });
+        if(!isOpen){
+          item.classList.add('open');
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+        }
+      });
+    });
+  })();
+</script>
+
+</body>
+              </html>
